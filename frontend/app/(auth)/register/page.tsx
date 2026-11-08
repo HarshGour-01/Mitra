@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { DemoShowcaseDrawer } from "@/components/ui/DemoShowcaseDrawer";
 import { supabase } from "@/lib/supabase/client";
 import { UserRole } from "@/types/api";
 
@@ -52,57 +53,57 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFF8FA] dark:bg-[#171217]">
+    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#17152B] dark:bg-[#12101F] dark:text-[#F7F5F0]">
       <Navbar />
 
-      <main className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6">
-        <div className="w-full max-w-md space-y-6">
-          <div className="text-center space-y-2">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#E879A5] to-[#C94F7C] text-white shadow-md">
-              <Sparkles className="h-6 w-6" />
+      <main className="flex-1 flex items-center justify-center py-16 px-4 sm:px-6">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center space-y-3">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#7655E8] to-[#29234B] text-white shadow-md shadow-[#7655E8]/20">
+              <Sparkles className="h-6 w-6 text-[#E8C98A]" />
             </div>
-            <h1 className="text-2xl font-extrabold text-[#30232A] dark:text-[#FFF3F7]">
+            <h1 className="text-3xl font-black text-[#17152B] dark:text-[#F7F5F0]">
               Join the MITRA Network
             </h1>
-            <p className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
+            <p className="text-xs text-[#555366] dark:text-[#9290A0]">
               Where Academic Potential Meets Industry Opportunity
             </p>
           </div>
 
-          <Card className="shadow-lg border-[#F1DCE5] dark:border-[#493440]">
-            <CardHeader className="space-y-1">
-              <CardTitle className="text-base">Create MITRA Account</CardTitle>
+          <Card className="shadow-xl border-[#E8E4DD] dark:border-[#2E274D]">
+            <CardHeader className="space-y-1.5 p-7">
+              <CardTitle className="text-lg">Create MITRA Account</CardTitle>
               <CardDescription>Select your ecosystem role and provide credentials</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-7 pt-0">
               {registered ? (
-                <div className="text-center py-6 space-y-3">
-                  <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" />
-                  <h3 className="text-base font-bold text-[#30232A] dark:text-[#FFF3F7]">
+                <div className="text-center py-8 space-y-4">
+                  <CheckCircle2 className="mx-auto h-12 w-12 text-[#329B75]" />
+                  <h3 className="text-lg font-bold text-[#17152B] dark:text-[#F7F5F0]">
                     Account Created Successfully!
                   </h3>
-                  <p className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
+                  <p className="text-xs text-[#555366] dark:text-[#9290A0] leading-relaxed">
                     We have sent a verification confirmation to <strong>{email}</strong>.
                   </p>
-                  <Link href="/login">
-                    <Button className="mt-4 w-full">Proceed to Sign In</Button>
+                  <Link href="/login" className="block pt-2">
+                    <Button className="w-full font-bold">Proceed to Sign In</Button>
                   </Link>
                 </div>
               ) : (
-                <form onSubmit={handleRegister} className="space-y-4">
+                <form onSubmit={handleRegister} className="space-y-5">
                   {error && (
-                    <div className="p-3 rounded-xl bg-red-50 text-red-600 text-xs flex items-center gap-2 dark:bg-red-950/30 dark:text-red-400">
+                    <div className="p-3.5 rounded-xl bg-rose-50 text-rose-700 text-xs flex items-center gap-2.5 dark:bg-rose-950/40 dark:text-rose-300">
                       <AlertCircle className="h-4 w-4 shrink-0" />
                       {error}
                     </div>
                   )}
 
                   <div>
-                    <label className="text-xs font-semibold block mb-1">Your Ecosystem Role</label>
+                    <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Your Ecosystem Role</label>
                     <select
                       value={role}
                       onChange={(e) => setRole(e.target.value as UserRole)}
-                      className="w-full h-11 rounded-xl border border-[#F1DCE5] bg-white px-3 text-xs font-semibold text-[#30232A] dark:border-[#493440] dark:bg-[#211922] dark:text-[#FFF3F7]"
+                      className="w-full h-12 rounded-xl border border-[#E8E4DD] bg-white px-3 text-xs font-bold text-[#17152B] focus:border-[#7655E8] focus:outline-none dark:border-[#2E274D] dark:bg-[#1A162B] dark:text-[#F7F5F0]"
                     >
                       <option value="student">Student / Innovator</option>
                       <option value="recruiter">Corporate Recruiter / Company</option>
@@ -114,7 +115,7 @@ export default function RegisterPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold block mb-1">Full Name</label>
+                    <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Full Name</label>
                     <Input
                       required
                       placeholder="e.g. Harsh Gour"
@@ -124,7 +125,7 @@ export default function RegisterPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold block mb-1">Email</label>
+                    <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Email</label>
                     <Input
                       required
                       type="email"
@@ -135,7 +136,7 @@ export default function RegisterPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold block mb-1">Password (min 8 chars)</label>
+                    <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Password (min 8 chars)</label>
                     <Input
                       required
                       type="password"
@@ -147,7 +148,7 @@ export default function RegisterPage() {
 
                   <Button
                     type="submit"
-                    className="w-full font-bold"
+                    className="w-full font-bold shadow-hover mt-2"
                     isLoading={loading}
                   >
                     Register Account
@@ -157,9 +158,9 @@ export default function RegisterPage() {
             </CardContent>
           </Card>
 
-          <div className="text-center text-xs text-[#806D76] dark:text-[#C3ADB8]">
+          <div className="text-center text-xs text-[#555366] dark:text-[#9290A0]">
             Already have an account?{" "}
-            <Link href="/login" className="font-bold text-[#C94F7C] hover:underline dark:text-[#F09ABB]">
+            <Link href="/login" className="font-bold text-[#7655E8] hover:underline dark:text-[#EDE8FF]">
               Sign In
             </Link>
           </div>
@@ -167,6 +168,7 @@ export default function RegisterPage() {
       </main>
 
       <Footer />
+      <DemoShowcaseDrawer />
     </div>
   );
 }

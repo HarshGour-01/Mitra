@@ -42,65 +42,65 @@ export default function ProfilePage() {
   });
 
   return (
-    <div className="space-y-8 max-w-4xl mx-auto">
+    <div className="space-y-10 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#30232A] dark:text-[#FFF3F7]">
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-[#17152B] dark:text-[#F7F5F0]">
           Account & Academic Profile
         </h1>
-        <p className="text-xs text-[#806D76] dark:text-[#C3ADB8] mt-1">
-          Manage your verified academic identity and contact links visible to partner institutions.
+        <p className="text-xs sm:text-sm text-[#555366] dark:text-[#9290A0] mt-1">
+          Manage your verified academic identity, degree information, and public portfolios.
         </p>
       </div>
 
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#E879A5] to-[#C94F7C] text-2xl font-bold text-white shadow-md">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="flex items-center gap-5">
+              <div className="flex h-18 w-18 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#7655E8] to-[#29234B] text-2xl font-bold text-white shadow-md shadow-[#7655E8]/20">
                 {displayName.charAt(0).toUpperCase()}
               </div>
-              <div>
-                <CardTitle className="text-lg">{displayName}</CardTitle>
+              <div className="space-y-1">
+                <CardTitle className="text-xl">{displayName}</CardTitle>
                 <CardDescription>{user?.email || "student@mitra.edu"}</CardDescription>
-                <Badge variant="verified" className="mt-1.5 uppercase text-[10px]">
+                <Badge variant="verified" className="uppercase text-[10px] font-bold">
                   Role: {role.replace("_", " ")}
                 </Badge>
               </div>
             </div>
             {savedSuccess && (
-              <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
+              <span className="text-xs text-[#329B75] font-bold flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
                 <CheckCircle2 className="h-4 w-4" /> Profile Updated
               </span>
             )}
           </div>
         </CardHeader>
-        <CardContent className="space-y-6 pt-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <CardContent className="space-y-8 pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label className="text-xs font-semibold block mb-1">Full Legal Name</label>
+              <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Full Legal Name</label>
               <Input
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
               />
             </div>
             <div>
-              <label className="text-xs font-semibold block mb-1">Email Address (Read-only)</label>
+              <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Email Address (Read-only)</label>
               <Input
                 disabled
                 value={user?.email || "student@mitra.edu"}
-                className="bg-gray-50 text-gray-500 cursor-not-allowed dark:bg-gray-800"
+                className="bg-[#F7F5F0] text-[#9290A0] cursor-not-allowed dark:bg-[#12101F]"
               />
             </div>
 
             <div>
-              <label className="text-xs font-semibold block mb-1">Academic Department</label>
+              <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Academic Department</label>
               <Input
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
               />
             </div>
             <div>
-              <label className="text-xs font-semibold block mb-1">Primary Career Objective</label>
+              <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Primary Career Objective</label>
               <Input
                 value={careerGoal}
                 onChange={(e) => setCareerGoal(e.target.value)}
@@ -108,14 +108,14 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="text-xs font-semibold block mb-1">GitHub Portfolio Link</label>
+              <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">GitHub Portfolio Link</label>
               <Input
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
               />
             </div>
             <div>
-              <label className="text-xs font-semibold block mb-1">LinkedIn Profile</label>
+              <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">LinkedIn Profile</label>
               <Input
                 value={linkedinUrl}
                 onChange={(e) => setLinkedinUrl(e.target.value)}
@@ -123,9 +123,9 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <div className="flex justify-end pt-4 border-t border-[#F1DCE5] dark:border-[#493440]">
+          <div className="flex justify-end pt-4 border-t border-[#E8E4DD] dark:border-[#2E274D]">
             <Button
-              className="gap-2"
+              className="gap-2 font-bold shadow-hover"
               onClick={() => saveProfileMutation.mutate()}
               isLoading={saveProfileMutation.isPending}
             >

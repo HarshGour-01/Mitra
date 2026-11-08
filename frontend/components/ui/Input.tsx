@@ -9,7 +9,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-11 w-full rounded-xl border border-[#F1DCE5] bg-white px-3.5 py-2 text-sm text-[#30232A] transition-colors placeholder:text-[#806D76]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E879A5] disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#493440] dark:bg-[#211922] dark:text-[#FFF3F7] dark:placeholder:text-[#C3ADB8]/60 dark:focus-visible:ring-[#F09ABB]",
+          "flex h-12 w-full rounded-xl border border-[#E8E4DD] bg-white px-4 py-2.5 text-sm text-[#17152B] transition-all duration-150 placeholder:text-[#9290A0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7655E8] focus-visible:border-transparent disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#2E274D] dark:bg-[#1A162B] dark:text-[#F7F5F0] dark:placeholder:text-[#9290A0]/60 dark:focus-visible:ring-[#7655E8]",
           className
         )}
         ref={ref}
@@ -27,7 +27,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         className={cn(
-          "flex min-h-[100px] w-full rounded-xl border border-[#F1DCE5] bg-white px-3.5 py-2.5 text-sm text-[#30232A] transition-colors placeholder:text-[#806D76]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E879A5] disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#493440] dark:bg-[#211922] dark:text-[#FFF3F7] dark:placeholder:text-[#C3ADB8]/60 dark:focus-visible:ring-[#F09ABB]",
+          "flex min-h-[110px] w-full rounded-xl border border-[#E8E4DD] bg-white px-4 py-3 text-sm text-[#17152B] transition-all duration-150 placeholder:text-[#9290A0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7655E8] focus-visible:border-transparent disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#2E274D] dark:bg-[#1A162B] dark:text-[#F7F5F0] dark:placeholder:text-[#9290A0]/60 dark:focus-visible:ring-[#7655E8]",
           className
         )}
         ref={ref}

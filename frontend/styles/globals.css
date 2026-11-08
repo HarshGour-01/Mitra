@@ -4,57 +4,58 @@
 
 @layer base {
   :root {
-    --background: #FFF8FA;
-    --foreground: #30232A;
+    --background: #F7F5F0;
+    --foreground: #17152B;
     --card: #FFFFFF;
-    --card-foreground: #30232A;
-    --primary: #E879A5;
+    --card-foreground: #17152B;
+    --primary: #7655E8;
     --primary-foreground: #FFFFFF;
-    --primary-hover: #C94F7C;
-    --secondary: #FFF0F5;
-    --secondary-foreground: #806D76;
-    --accent: #F8DCE8;
-    --accent-foreground: #C94F7C;
-    --muted: #FFF0F5;
-    --muted-foreground: #806D76;
-    --border: #F1DCE5;
-    --input: #F1DCE5;
-    --ring: #E879A5;
-    --radius: 0.85rem;
+    --primary-hover: #29234B;
+    --secondary: #EDE8FF;
+    --secondary-foreground: #29234B;
+    --accent: #EDE8FF;
+    --accent-foreground: #7655E8;
+    --muted: #F2EFE9;
+    --muted-foreground: #555366;
+    --border: #E8E4DD;
+    --input: #E8E4DD;
+    --ring: #7655E8;
+    --radius: 0.875rem;
   }
 
   .dark {
-    --background: #171217;
-    --foreground: #FFF3F7;
-    --card: #2B202A;
-    --card-foreground: #FFF3F7;
-    --primary: #F09ABB;
-    --primary-foreground: #171217;
-    --primary-hover: #D77A9E;
-    --secondary: #211922;
-    --secondary-foreground: #C3ADB8;
-    --accent: #493440;
-    --accent-foreground: #F09ABB;
-    --muted: #211922;
-    --muted-foreground: #C3ADB8;
-    --border: #493440;
-    --input: #493440;
-    --ring: #F09ABB;
+    --background: #12101F;
+    --foreground: #F7F5F0;
+    --card: #1A162B;
+    --card-foreground: #F7F5F0;
+    --primary: #7655E8;
+    --primary-foreground: #FFFFFF;
+    --primary-hover: #8F72FA;
+    --secondary: #241E3D;
+    --secondary-foreground: #EDE8FF;
+    --accent: #29234B;
+    --accent-foreground: #EDE8FF;
+    --muted: #211C36;
+    --muted-foreground: #9290A0;
+    --border: #2E274D;
+    --input: #2E274D;
+    --ring: #7655E8;
   }
 }
 
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   min-height: 100vh;
+  letter-spacing: -0.011em;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--background);
@@ -65,4 +66,14 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
+}
+
+/* Glass and subtle premium blur */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dark .glass-panel {
+  background: rgba(26, 22, 43, 0.85);
 }

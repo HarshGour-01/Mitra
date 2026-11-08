@@ -1,120 +1,129 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles, Heart, ShieldCheck, Mail, Globe, MapPin } from "lucide-react";
+import { Sparkles, Heart, ShieldCheck, Mail, Globe, MapPin, CheckCircle2 } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#F1DCE5] bg-[#FFF0F5]/50 py-14 dark:border-[#493440] dark:bg-[#171217]">
+    <footer className="border-t border-[#E8E4DD] bg-[#17152B] text-[#F7F5F0] py-20 dark:border-[#2E274D] dark:bg-[#0E0C18]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand Column */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[#E879A5] to-[#C94F7C] text-white shadow-sm">
-                <Sparkles className="h-4 w-4" />
+          <div className="lg:col-span-2 space-y-5">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#7655E8] text-white shadow-md shadow-[#7655E8]/30">
+                <Sparkles className="h-5 w-5 text-[#E8C98A]" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-[#C94F7C] dark:text-[#F09ABB]">
-                MITRA
-              </span>
+              <div>
+                <span className="text-2xl font-black tracking-tight text-white">
+                  MITRA
+                </span>
+                <span className="block text-xs font-semibold text-[#E8C98A]">
+                  Your Future, Your Mitra.
+                </span>
+              </div>
             </div>
-            <p className="text-sm font-medium text-[#C94F7C] dark:text-[#F09ABB]">
-              Your Future, Your Mitra.
+
+            <p className="max-w-md text-sm text-[#9290A0] leading-relaxed">
+              An intelligent ecosystem connecting students, universities, mentors, and leading industries across India to transform verified academic potential into real-world career opportunities.
             </p>
-            <p className="max-w-sm text-sm text-[#806D76] dark:text-[#C3ADB8] leading-relaxed">
-              An AI-powered Academia–Industry Collaboration Platform connecting ambitious students, accredited universities, leading recruiters, and experienced research mentors across India.
-            </p>
-            <div className="flex items-center gap-2 text-xs text-[#806D76] dark:text-[#C3ADB8]">
-              <ShieldCheck className="h-4 w-4 text-[#E879A5]" />
-              National Hackathon Production Architecture
+
+            <div className="flex items-center gap-2 rounded-xl bg-[#29234B]/70 p-3 text-xs text-[#EDE8FF] border border-[#7655E8]/20 max-w-md">
+              <ShieldCheck className="h-4 w-4 text-[#E8C98A] shrink-0" />
+              <span>National Smart India Hackathon Architecture • SIH 2026 Production Ready</span>
             </div>
           </div>
 
           {/* Platform Columns */}
-          <div>
-            <h4 className="text-sm font-semibold text-[#30232A] dark:text-[#FFF3F7] tracking-wider uppercase">
+          <div className="space-y-4">
+            <h4 className="text-xs font-bold text-[#E8C98A] tracking-wider uppercase">
               Platform
             </h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/opportunities" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
+                <Link href="/opportunities" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
                   Opportunities Directory
                 </Link>
               </li>
               <li>
-                <Link href="/students" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
-                  Skill Passport
+                <Link href="/students" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
+                  Skill Passport Verification
                 </Link>
               </li>
               <li>
-                <Link href="/how-it-works" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
+                <Link href="/how-it-works" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
                   AI Career Intelligence
                 </Link>
               </li>
               <li>
-                <Link href="/companies" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
-                  Recruiter Matching
+                <Link href="/companies" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
+                  Recruiter Matching Engine
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-sm font-semibold text-[#30232A] dark:text-[#FFF3F7] tracking-wider uppercase">
+          <div className="space-y-4">
+            <h4 className="text-xs font-bold text-[#E8C98A] tracking-wider uppercase">
               Stakeholders
             </h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/students" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
+                <Link href="/students" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
                   For Students
                 </Link>
               </li>
               <li>
-                <Link href="/institutions" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
+                <Link href="/institutions" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
                   For Universities
                 </Link>
               </li>
               <li>
-                <Link href="/companies" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
-                  For Companies
+                <Link href="/companies" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
+                  For Corporate Recruiters
                 </Link>
               </li>
               <li>
-                <Link href="/mentors" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
-                  For Mentors & Faculty
+                <Link href="/mentors" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
+                  For Research Mentors & Faculty
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-sm font-semibold text-[#30232A] dark:text-[#FFF3F7] tracking-wider uppercase">
-              Legal & Trust
+          <div className="space-y-4">
+            <h4 className="text-xs font-bold text-[#E8C98A] tracking-wider uppercase">
+              Trust & Legal
             </h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/privacy" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
+                <Link href="/privacy" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
+                <Link href="/terms" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]">
-                  Support & Contact
+                <Link href="/contact" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
+                  Contact Support
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-[#9290A0] hover:text-[#EDE8FF] transition-colors">
+                  About the Vision
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-[#F1DCE5] pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#806D76] dark:border-[#493440] dark:text-[#C3ADB8] gap-4">
-          <p>© {new Date().getFullYear()} MITRA Platform. Built for Indian Academia–Industry Innovation.</p>
-          <div className="flex items-center gap-1">
-            Designed with <Heart className="h-3.5 w-3.5 text-[#E879A5] fill-current" /> for educational excellence.
-          </div>
+        <div className="mt-16 border-t border-[#29234B] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9290A0]">
+          <p>© 2026 MITRA National Platform. Built for India’s Academic & Industrial Excellence.</p>
+          <p className="flex items-center gap-1.5 text-[#EDE8FF]">
+            <span>Where Potential Becomes Opportunity</span>
+          </p>
         </div>
       </div>
     </footer>

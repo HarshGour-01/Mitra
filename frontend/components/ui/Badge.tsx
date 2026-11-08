@@ -2,21 +2,23 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "secondary" | "outline" | "success" | "verified" | "warning";
+  variant?: "default" | "secondary" | "outline" | "success" | "verified" | "warning" | "gold";
 }
 
 export function Badge({ className, variant = "default", ...props }: BadgeProps) {
   const variants = {
     default:
-      "bg-[#FFF0F5] text-[#C94F7C] border border-[#F1DCE5] dark:bg-[#211922] dark:text-[#F09ABB] dark:border-[#493440]",
+      "bg-[#EDE8FF] text-[#29234B] border border-[#EDE8FF] dark:bg-[#241E3D] dark:text-[#EDE8FF] dark:border-[#2E274D]",
     secondary:
-      "bg-pink-100 text-[#C94F7C] dark:bg-pink-950/40 dark:text-pink-300",
+      "bg-[#F7F5F0] text-[#555366] border border-[#E8E4DD] dark:bg-[#211C36] dark:text-[#9290A0] dark:border-[#2E274D]",
     outline:
-      "border border-[#E879A5] text-[#C94F7C] dark:border-[#F09ABB] dark:text-[#F09ABB]",
+      "border border-[#7655E8]/40 text-[#7655E8] bg-transparent dark:border-[#7655E8]/60 dark:text-[#EDE8FF]",
     success:
-      "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-800",
+      "bg-emerald-50 text-[#329B75] border border-emerald-200/80 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-800",
     verified:
-      "bg-gradient-to-r from-pink-500/10 to-rose-500/10 text-[#C94F7C] border border-[#E879A5]/40 font-semibold dark:text-[#F09ABB]",
+      "bg-[#EDE8FF] text-[#7655E8] border border-[#7655E8]/30 font-semibold shadow-xs dark:bg-[#241E3D] dark:text-[#EDE8FF] dark:border-[#7655E8]/50",
+    gold:
+      "bg-[#E8C98A]/20 text-[#9B7020] border border-[#E8C98A]/50 font-bold dark:bg-[#E8C98A]/15 dark:text-[#E8C98A] dark:border-[#E8C98A]/40",
     warning:
       "bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800",
   };
@@ -24,7 +26,7 @@ export function Badge({ className, variant = "default", ...props }: BadgeProps) 
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors",
+        "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide transition-colors",
         variants[variant],
         className
       )}

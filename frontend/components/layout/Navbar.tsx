@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, Menu, X, ArrowRight, UserCircle2, LogIn } from "lucide-react";
+import { Sparkles, Menu, X, ArrowRight, UserCircle2, LogIn, ShieldCheck } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Button } from "@/components/ui/Button";
 import { useAuth } from "@/hooks/useAuth";
@@ -25,19 +25,24 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#F1DCE5]/80 bg-[#FFF8FA]/90 backdrop-blur-md transition-colors dark:border-[#493440]/80 dark:bg-[#171217]/90">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b border-[#E8E4DD]/80 bg-[#F7F5F0]/90 backdrop-blur-md transition-colors dark:border-[#2E274D]/80 dark:bg-[#12101F]/90">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-[#E879A5] to-[#C94F7C] text-white shadow-md shadow-pink-500/20 group-hover:scale-105 transition-transform">
-            <Sparkles className="h-5 w-5" />
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#7655E8] to-[#29234B] text-white shadow-md shadow-[#7655E8]/20 group-hover:scale-105 transition-transform">
+            <Sparkles className="h-5 w-5 text-[#E8C98A]" />
           </div>
           <div>
-            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-[#C94F7C] to-[#E879A5] bg-clip-text text-transparent dark:from-[#F09ABB] dark:to-[#FFF3F7]">
-              MITRA
-            </span>
-            <span className="hidden sm:inline-block ml-2 text-xs font-medium text-[#806D76] dark:text-[#C3ADB8]">
-              Academia–Industry
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black tracking-tight text-[#17152B] dark:text-[#F7F5F0]">
+                MITRA
+              </span>
+              <span className="rounded-full border border-[#E8C98A] bg-[#E8C98A]/20 px-2 py-0.5 text-[10px] font-bold text-[#A07525] dark:text-[#E8C98A]">
+                SIH &apos;26
+              </span>
+            </div>
+            <span className="hidden sm:inline-block text-[11px] font-medium text-[#555366] dark:text-[#9290A0]">
+              Academia–Industry Cloud
             </span>
           </div>
         </Link>
@@ -49,10 +54,10 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-[#C94F7C] dark:hover:text-[#F09ABB]",
+                "text-sm font-semibold transition-colors hover:text-[#7655E8] dark:hover:text-[#EDE8FF]",
                 pathname === link.href
-                  ? "text-[#C94F7C] font-semibold dark:text-[#F09ABB]"
-                  : "text-[#30232A]/80 dark:text-[#FFF3F7]/80"
+                  ? "text-[#7655E8] font-bold dark:text-[#EDE8FF]"
+                  : "text-[#555366] dark:text-[#9290A0]"
               )}
             >
               {link.label}
@@ -65,7 +70,7 @@ export function Navbar() {
           <ThemeToggle />
 
           {isAuthenticated ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <Link href={`/dashboard/${user?.role || "student"}`}>
                 <Button size="sm" variant="default" className="font-semibold">
                   Dashboard
@@ -76,14 +81,14 @@ export function Navbar() {
               </Button>
             </div>
           ) : (
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-2.5">
               <Link href="/login">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="font-semibold">
                   Sign In
                 </Button>
               </Link>
               <Link href="/register">
-                <Button variant="default" size="sm" className="gap-1.5 font-semibold">
+                <Button variant="default" size="sm" className="gap-1.5 font-bold shadow-md shadow-[#7655E8]/20">
                   Get Started <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -93,7 +98,7 @@ export function Navbar() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="lg:hidden p-2 rounded-xl text-[#30232A] hover:bg-[#FFF0F5] dark:text-[#FFF3F7] dark:hover:bg-[#211922]"
+            className="lg:hidden p-2 rounded-xl text-[#17152B] hover:bg-[#EDE8FF] dark:text-[#F7F5F0] dark:hover:bg-[#241E3D] transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -101,20 +106,28 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-[#F1DCE5] bg-[#FFF8FA] px-4 pt-2 pb-6 space-y-3 dark:border-[#493440] dark:bg-[#171217]">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block rounded-lg px-3 py-2 text-base font-medium text-[#30232A] hover:bg-[#FFF0F5] dark:text-[#FFF3F7] dark:hover:bg-[#211922]"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-4 border-t border-[#F1DCE5] dark:border-[#493440] flex flex-col gap-2">
+        <div className="lg:hidden border-t border-[#E8E4DD] bg-[#F7F5F0] px-4 pt-4 pb-6 space-y-3 dark:border-[#2E274D] dark:bg-[#12101F]">
+          <div className="flex flex-col space-y-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors",
+                  pathname === link.href
+                    ? "bg-[#EDE8FF] text-[#7655E8] dark:bg-[#241E3D] dark:text-[#EDE8FF]"
+                    : "text-[#555366] hover:bg-white dark:text-[#9290A0] dark:hover:bg-[#1A162B]"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="border-t border-[#E8E4DD] pt-4 dark:border-[#2E274D] flex flex-col gap-2">
             {!isAuthenticated ? (
               <>
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
@@ -124,7 +137,7 @@ export function Navbar() {
                 </Link>
                 <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
                   <Button variant="default" className="w-full">
-                    Get Started
+                    Get Started Free
                   </Button>
                 </Link>
               </>

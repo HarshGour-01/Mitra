@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { DemoShowcaseDrawer } from "@/components/ui/DemoShowcaseDrawer";
 import { supabase } from "@/lib/supabase/client";
 
 export default function ForgotPasswordPage() {
@@ -30,35 +31,35 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFF8FA] dark:bg-[#171217]">
+    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#17152B] dark:bg-[#12101F] dark:text-[#F7F5F0]">
       <Navbar />
 
-      <main className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6">
-        <div className="w-full max-w-md space-y-6">
-          <Card className="shadow-lg border-[#F1DCE5] dark:border-[#493440]">
-            <CardHeader>
-              <CardTitle className="text-base">Reset Your Password</CardTitle>
+      <main className="flex-1 flex items-center justify-center py-16 px-4 sm:px-6">
+        <div className="w-full max-w-md space-y-8">
+          <Card className="shadow-xl border-[#E8E4DD] dark:border-[#2E274D]">
+            <CardHeader className="p-7">
+              <CardTitle className="text-xl">Reset Your Password</CardTitle>
               <CardDescription>
-                We'll send a secure password reset link to your registered email address.
+                We&apos;ll send a secure password reset link to your registered institutional or personal email address.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-7 pt-0">
               {submitted ? (
-                <div className="text-center py-4 space-y-3">
-                  <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-600" />
-                  <p className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
+                <div className="text-center py-6 space-y-4">
+                  <CheckCircle2 className="mx-auto h-12 w-12 text-[#329B75]" />
+                  <p className="text-xs text-[#555366] dark:text-[#9290A0] leading-relaxed">
                     Check your inbox at <strong>{email}</strong> for instructions to reset your password.
                   </p>
-                  <Link href="/login">
-                    <Button variant="outline" size="sm" className="mt-2">
+                  <Link href="/login" className="block pt-2">
+                    <Button variant="outline" size="sm" className="w-full">
                       Return to Sign In
                     </Button>
                   </Link>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label className="text-xs font-semibold block mb-1">Registered Email</label>
+                    <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Registered Email</label>
                     <Input
                       required
                       type="email"
@@ -67,7 +68,7 @@ export default function ForgotPasswordPage() {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                  <Button type="submit" className="w-full font-bold" isLoading={loading}>
+                  <Button type="submit" className="w-full font-bold shadow-hover" isLoading={loading}>
                     Send Reset Link
                   </Button>
                 </form>
@@ -78,7 +79,7 @@ export default function ForgotPasswordPage() {
           <div className="text-center">
             <Link
               href="/login"
-              className="inline-flex items-center gap-1.5 text-xs text-[#806D76] hover:text-[#C94F7C] dark:text-[#C3ADB8] dark:hover:text-[#F09ABB]"
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#555366] hover:text-[#7655E8] dark:text-[#9290A0] dark:hover:text-[#EDE8FF] transition-colors"
             >
               <ArrowLeft className="h-4 w-4" /> Back to Sign In
             </Link>
@@ -87,6 +88,7 @@ export default function ForgotPasswordPage() {
       </main>
 
       <Footer />
+      <DemoShowcaseDrawer />
     </div>
   );
 }

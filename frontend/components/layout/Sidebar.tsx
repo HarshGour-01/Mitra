@@ -118,22 +118,27 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "relative flex flex-col border-r border-[#F1DCE5] bg-white transition-all duration-300 dark:border-[#493440] dark:bg-[#211922] min-h-screen",
+        "relative flex flex-col border-r border-[#E8E4DD] bg-white transition-all duration-300 dark:border-[#2E274D] dark:bg-[#1A162B] min-h-screen",
         collapsed ? "w-20" : "w-64"
       )}
     >
       {/* Sidebar Header */}
-      <div className="flex h-18 items-center justify-between px-4 border-b border-[#F1DCE5] dark:border-[#493440]">
+      <div className="flex h-20 items-center justify-between px-4 border-b border-[#E8E4DD] dark:border-[#2E274D]">
         {!collapsed && (
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[#E879A5] to-[#C94F7C] text-white shadow-sm">
-              <Sparkles className="h-4 w-4" />
+          <Link href="/" className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#7655E8] to-[#29234B] text-white shadow-md shadow-[#7655E8]/20">
+              <Sparkles className="h-4 w-4 text-[#E8C98A]" />
             </div>
             <div>
-              <span className="text-lg font-bold tracking-tight text-[#C94F7C] dark:text-[#F09ABB]">
-                MITRA
-              </span>
-              <span className="block text-[10px] uppercase font-semibold tracking-wider text-[#806D76] dark:text-[#C3ADB8]">
+              <div className="flex items-center gap-1.5">
+                <span className="text-lg font-black tracking-tight text-[#17152B] dark:text-[#F7F5F0]">
+                  MITRA
+                </span>
+                <span className="rounded bg-[#EDE8FF] px-1.5 py-0.5 text-[9px] font-bold text-[#7655E8] dark:bg-[#241E3D] dark:text-[#EDE8FF]">
+                  PRO
+                </span>
+              </div>
+              <span className="block text-[10px] uppercase font-bold tracking-wider text-[#555366] dark:text-[#9290A0]">
                 {role.replace("_", " ")}
               </span>
             </div>
@@ -143,14 +148,14 @@ export function Sidebar() {
         <button
           type="button"
           onClick={() => setCollapsed(!collapsed)}
-          className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-[#F1DCE5] text-[#806D76] hover:bg-[#FFF0F5] dark:border-[#493440] dark:text-[#C3ADB8] dark:hover:bg-[#2B202A]"
+          className="mx-auto flex h-8 w-8 items-center justify-center rounded-xl border border-[#E8E4DD] text-[#555366] hover:bg-[#EDE8FF] hover:text-[#7655E8] dark:border-[#2E274D] dark:text-[#9290A0] dark:hover:bg-[#241E3D] transition-colors"
         >
           {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </button>
       </div>
 
       {/* Role Navigation Items */}
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+      <div className="flex-1 overflow-y-auto px-3 py-5 space-y-1.5">
         {currentNav.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -159,18 +164,23 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150",
+                "group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-all duration-150",
                 isActive
-                  ? "bg-[#FFF0F5] text-[#C94F7C] font-semibold dark:bg-[#2B202A] dark:text-[#F09ABB]"
-                  : "text-[#30232A]/80 hover:bg-[#FFF8FA] hover:text-[#C94F7C] dark:text-[#FFF3F7]/80 dark:hover:bg-[#2B202A]/50 dark:hover:text-[#F09ABB]"
+                  ? "bg-[#EDE8FF] text-[#7655E8] shadow-xs dark:bg-[#241E3D] dark:text-[#EDE8FF]"
+                  : "text-[#555366] hover:bg-[#F7F5F0] hover:text-[#17152B] dark:text-[#9290A0] dark:hover:bg-[#241E3D]/50 dark:hover:text-[#F7F5F0]"
               )}
             >
-              <Icon className={cn("h-4 w-4 shrink-0 transition-transform group-hover:scale-110", isActive ? "text-[#C94F7C] dark:text-[#F09ABB]" : "text-[#806D76] dark:text-[#C3ADB8]")} />
+              <Icon
+                className={cn(
+                  "h-4 w-4 shrink-0 transition-transform group-hover:scale-110",
+                  isActive ? "text-[#7655E8] dark:text-[#EDE8FF]" : "text-[#555366] dark:text-[#9290A0]"
+                )}
+              />
               {!collapsed && (
                 <div className="flex flex-1 items-center justify-between overflow-hidden">
                   <span className="truncate">{item.label}</span>
                   {item.badge && (
-                    <span className="ml-2 rounded-md bg-[#F8DCE8] px-1.5 py-0.5 text-[10px] font-semibold text-[#C94F7C] dark:bg-[#493440] dark:text-[#F09ABB]">
+                    <span className="ml-2 rounded-md bg-white border border-[#E8E4DD] px-1.5 py-0.5 text-[10px] font-bold text-[#7655E8] dark:bg-[#12101F] dark:border-[#2E274D] dark:text-[#EDE8FF]">
                       {item.badge}
                     </span>
                   )}
@@ -181,40 +191,40 @@ export function Sidebar() {
         })}
       </div>
 
-      {/* Demo Role Switcher (Convenient for evaluators) */}
+      {/* Evaluator Persona Switcher (Clean, Spacious) */}
       {!collapsed && (
-        <div className="px-3 py-2 border-t border-[#F1DCE5] dark:border-[#493440]">
-          <label className="text-[10px] uppercase font-bold text-[#806D76] dark:text-[#C3ADB8] block mb-1">
-            Simulate Persona:
+        <div className="px-3 py-3 border-t border-[#E8E4DD] bg-[#F7F5F0]/60 dark:border-[#2E274D] dark:bg-[#12101F]/40">
+          <label className="text-[10px] uppercase font-bold text-[#555366] dark:text-[#9290A0] block mb-1.5">
+            Switch Perspective:
           </label>
           <select
             value={role}
             onChange={(e) => signInWithDemoRole(e.target.value as UserRole)}
-            className="w-full text-xs rounded-lg border border-[#F1DCE5] bg-[#FFF8FA] p-1.5 text-[#30232A] dark:border-[#493440] dark:bg-[#171217] dark:text-[#FFF3F7]"
+            className="w-full text-xs font-semibold rounded-xl border border-[#E8E4DD] bg-white p-2 text-[#17152B] focus:border-[#7655E8] focus:outline-none dark:border-[#2E274D] dark:bg-[#1A162B] dark:text-[#F7F5F0]"
           >
-            <option value="student">Student</option>
+            <option value="student">Student Portal</option>
             <option value="recruiter">Recruiter / Industry</option>
-            <option value="institution_admin">Institution Admin</option>
-            <option value="faculty">Faculty Member</option>
+            <option value="institution_admin">University Admin</option>
+            <option value="faculty">Faculty Supervisor</option>
             <option value="mentor">Industry Mentor</option>
-            <option value="researcher">Researcher</option>
-            <option value="admin">Platform Admin</option>
+            <option value="researcher">Academic Researcher</option>
+            <option value="admin">Platform Governance</option>
           </select>
         </div>
       )}
 
       {/* User Profile Footer */}
-      <div className="border-t border-[#F1DCE5] p-3 dark:border-[#493440]">
+      <div className="border-t border-[#E8E4DD] p-3.5 dark:border-[#2E274D]">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-[#E879A5] to-[#C94F7C] text-xs font-bold text-white">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-[#7655E8] to-[#29234B] text-xs font-bold text-white shadow-sm">
             {user?.full_name ? user.full_name.charAt(0).toUpperCase() : "U"}
           </div>
           {!collapsed && (
             <div className="flex-1 overflow-hidden">
-              <p className="truncate text-xs font-semibold text-[#30232A] dark:text-[#FFF3F7]">
-                {user?.full_name || "MITRA User"}
+              <p className="truncate text-xs font-bold text-[#17152B] dark:text-[#F7F5F0]">
+                {user?.full_name || "MITRA Member"}
               </p>
-              <p className="truncate text-[11px] text-[#806D76] dark:text-[#C3ADB8]">
+              <p className="truncate text-[11px] text-[#555366] dark:text-[#9290A0]">
                 {user?.email || "user@mitra.edu"}
               </p>
             </div>
@@ -223,7 +233,7 @@ export function Sidebar() {
             type="button"
             onClick={signOut}
             title="Sign Out"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-[#806D76] hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/30"
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-[#555366] hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30 transition-colors"
           >
             <LogOut className="h-4 w-4" />
           </button>

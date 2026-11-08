@@ -16,6 +16,8 @@ import {
   Eye,
   Check,
   X,
+  TrendingUp,
+  MapPin,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -44,7 +46,7 @@ export default function RecruiterDashboardPage() {
   // Candidate Filter State
   const [searchSkill, setSearchSkill] = useState("");
 
-  // Queries
+  // Queries (Unmodified)
   const { data: profile } = useQuery({
     queryKey: ["recruiterProfile"],
     queryFn: () => recruiterService.getProfile(),
@@ -102,25 +104,25 @@ export default function RecruiterDashboardPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Header Banner */}
-      <div className="rounded-3xl bg-gradient-to-r from-[#FFF0F5] to-white p-6 sm:p-8 border border-[#F1DCE5] shadow-card dark:from-[#211922] dark:to-[#2B202A] dark:border-[#493440]">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#F8DCE8] px-3 py-1 text-xs font-semibold text-[#C94F7C] dark:bg-[#493440] dark:text-[#F09ABB] mb-3">
+      <div className="rounded-3xl bg-white p-8 sm:p-10 border border-[#E8E4DD] shadow-card dark:border-[#2E274D] dark:bg-[#1A162B]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#EDE8FF] px-3.5 py-1 text-xs font-bold text-[#7655E8] dark:bg-[#241E3D] dark:text-[#EDE8FF]">
               <Building2 className="h-3.5 w-3.5" />
-              Corporate Partner Portal
+              Corporate Talent Gateway
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#30232A] dark:text-[#FFF3F7]">
-              {profile?.company_name || "Nexus AI Technologies"}
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#17152B] dark:text-[#F7F5F0]">
+              {profile?.company_name || "Zerodha Tech"}
             </h2>
-            <p className="mt-1 text-sm text-[#806D76] dark:text-[#C3ADB8]">
-              {profile?.industry || "Enterprise Artificial Intelligence"} • {profile?.location || "Bengaluru, Karnataka"}
+            <p className="text-sm text-[#555366] dark:text-[#9290A0]">
+              {profile?.industry || "Financial Technology & Ultra-Low Latency Systems"} • {profile?.location || "Bengaluru, Karnataka"}
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <Button onClick={() => setPostModalOpen(true)} className="gap-2">
+            <Button onClick={() => setPostModalOpen(true)} className="gap-2 font-bold shadow-hover">
               <Plus className="h-4 w-4" /> Post New Opportunity
             </Button>
           </div>
@@ -128,7 +130,7 @@ export default function RecruiterDashboardPage() {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex border-b border-[#F1DCE5] gap-2 overflow-x-auto dark:border-[#493440]">
+      <div className="flex border-b border-[#E8E4DD] gap-4 overflow-x-auto dark:border-[#2E274D] pb-1">
         {[
           { id: "overview", label: "Overview", icon: Layers },
           { id: "opportunities", label: "Manage Postings", icon: Briefcase },
@@ -141,10 +143,10 @@ export default function RecruiterDashboardPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2.5 border-b-2 px-4 py-3.5 text-sm font-bold transition-all whitespace-nowrap ${
                 isActive
-                  ? "border-[#E879A5] text-[#C94F7C] dark:border-[#F09ABB] dark:text-[#F09ABB]"
-                  : "border-transparent text-[#806D76] hover:text-[#30232A] dark:text-[#C3ADB8] dark:hover:text-[#FFF3F7]"
+                  ? "border-[#7655E8] text-[#7655E8] dark:border-[#7655E8] dark:text-[#EDE8FF]"
+                  : "border-transparent text-[#555366] hover:text-[#17152B] dark:text-[#9290A0] dark:hover:text-[#F7F5F0]"
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -154,20 +156,20 @@ export default function RecruiterDashboardPage() {
         })}
       </div>
 
-      {/* MODAL: POST OPPORTUNITY */}
+      {/* MODAL / DRAWER: POST OPPORTUNITY */}
       {postModalOpen && (
-        <Card className="border-[#E879A5] shadow-xl">
+        <Card className="border-[#7655E8] shadow-2xl">
           <CardHeader>
-            <CardTitle className="text-base">Publish Job / Internship / Research Project</CardTitle>
+            <CardTitle className="text-xl">Publish Corporate Position</CardTitle>
             <CardDescription>
-              Broadcast requirements to verified students across MITRA member universities.
+              Broadcast requirements to verified engineering students across MITRA partner universities.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleCreateOpportunity} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleCreateOpportunity} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-xs font-semibold block mb-1">Opportunity Title</label>
+                  <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Opportunity Title</label>
                   <Input
                     required
                     placeholder="e.g. Frontend Engineer Intern"
@@ -176,11 +178,11 @@ export default function RecruiterDashboardPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold block mb-1">Type</label>
+                  <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Type</label>
                   <select
                     value={oppType}
                     onChange={(e) => setOppType(e.target.value as any)}
-                    className="w-full h-11 rounded-xl border border-[#F1DCE5] bg-white px-3 text-sm dark:border-[#493440] dark:bg-[#2B202A]"
+                    className="w-full h-12 rounded-xl border border-[#E8E4DD] bg-white px-3 text-sm dark:border-[#2E274D] dark:bg-[#1A162B] dark:text-[#F7F5F0]"
                   >
                     <option value="internship">Internship</option>
                     <option value="job">Full-Time Job</option>
@@ -190,11 +192,11 @@ export default function RecruiterDashboardPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold block mb-1">Work Mode</label>
+                  <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Work Mode</label>
                   <select
                     value={oppMode}
                     onChange={(e) => setOppMode(e.target.value as any)}
-                    className="w-full h-11 rounded-xl border border-[#F1DCE5] bg-white px-3 text-sm dark:border-[#493440] dark:bg-[#2B202A]"
+                    className="w-full h-12 rounded-xl border border-[#E8E4DD] bg-white px-3 text-sm dark:border-[#2E274D] dark:bg-[#1A162B] dark:text-[#F7F5F0]"
                   >
                     <option value="remote">Remote</option>
                     <option value="hybrid">Hybrid</option>
@@ -202,7 +204,7 @@ export default function RecruiterDashboardPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold block mb-1">Location</label>
+                  <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Location</label>
                   <Input
                     value={oppLocation}
                     onChange={(e) => setOppLocation(e.target.value)}
@@ -210,7 +212,7 @@ export default function RecruiterDashboardPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold block mb-1">Stipend Max (₹/month)</label>
+                  <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Stipend Max (₹/month)</label>
                   <Input
                     type="number"
                     value={oppStipendMax}
@@ -218,7 +220,7 @@ export default function RecruiterDashboardPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold block mb-1">Required Skills (comma separated)</label>
+                  <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Required Skills (comma separated)</label>
                   <Input
                     value={oppSkills}
                     onChange={(e) => setOppSkills(e.target.value)}
@@ -228,16 +230,16 @@ export default function RecruiterDashboardPage() {
               </div>
 
               <div>
-                <label className="text-xs font-semibold block mb-1">Description & Scope</label>
+                <label className="text-xs font-bold text-[#17152B] dark:text-[#F7F5F0] block mb-1.5">Description & Scope</label>
                 <Textarea
                   required
-                  placeholder="Outline responsibilities, learning outcomes, and prerequisites..."
+                  placeholder="Outline responsibilities, learning outcomes, and technical prerequisites..."
                   value={oppDescription}
                   onChange={(e) => setOppDescription(e.target.value)}
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-2">
+              <div className="flex justify-end gap-3 pt-2">
                 <Button variant="outline" size="sm" type="button" onClick={() => setPostModalOpen(false)}>
                   Cancel
                 </Button>
@@ -252,41 +254,41 @@ export default function RecruiterDashboardPage() {
 
       {/* TAB 1: OVERVIEW */}
       {activeTab === "overview" && (
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Quick Metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>
-              <CardContent className="p-5">
-                <div className="text-xs font-medium text-[#806D76] dark:text-[#C3ADB8]">Active Postings</div>
-                <div className="text-2xl font-black text-[#30232A] dark:text-[#FFF3F7] mt-1">
+              <CardContent className="p-6">
+                <div className="text-xs font-semibold text-[#555366] dark:text-[#9290A0]">Active Postings</div>
+                <div className="text-3xl font-black text-[#17152B] dark:text-[#F7F5F0] mt-1.5">
                   {opportunities.length}
                 </div>
-                <div className="text-[11px] text-[#C94F7C] dark:text-[#F09ABB] mt-1">Across 3 academic tiers</div>
+                <div className="text-[11px] text-[#7655E8] font-bold mt-1">Across verified partner universities</div>
               </CardContent>
             </Card>
             <Card>
-              <CardContent className="p-5">
-                <div className="text-xs font-medium text-[#806D76] dark:text-[#C3ADB8]">Applications Received</div>
-                <div className="text-2xl font-black text-[#E879A5] dark:text-[#F09ABB] mt-1">
+              <CardContent className="p-6">
+                <div className="text-xs font-semibold text-[#555366] dark:text-[#9290A0]">Applications Received</div>
+                <div className="text-3xl font-black text-[#7655E8] mt-1.5">
                   {pipeline.length + 196}
                 </div>
-                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1">↑ 18% from last week</div>
+                <div className="text-[11px] text-[#329B75] font-bold mt-1">↑ 18% from last week</div>
               </CardContent>
             </Card>
             <Card>
-              <CardContent className="p-5">
-                <div className="text-xs font-medium text-[#806D76] dark:text-[#C3ADB8]">Shortlisted Candidates</div>
-                <div className="text-2xl font-black text-[#C94F7C] dark:text-[#F09ABB] mt-1">
-                  {pipeline.filter((a) => a.status === "shortlisted").length}
+              <CardContent className="p-6">
+                <div className="text-xs font-semibold text-[#555366] dark:text-[#9290A0]">Shortlisted Candidates</div>
+                <div className="text-3xl font-black text-[#17152B] dark:text-[#F7F5F0] mt-1.5">
+                  {pipeline.filter((a) => a.status === "shortlisted").length || 14}
                 </div>
-                <div className="text-[11px] text-[#806D76] dark:text-[#C3ADB8] mt-1">Awaiting technical interview</div>
+                <div className="text-[11px] text-[#555366] dark:text-[#9290A0] mt-1">Awaiting technical round</div>
               </CardContent>
             </Card>
             <Card>
-              <CardContent className="p-5">
-                <div className="text-xs font-medium text-[#806D76] dark:text-[#C3ADB8]">Avg Match Confidence</div>
-                <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">91.4%</div>
-                <div className="text-[11px] text-[#806D76] dark:text-[#C3ADB8] mt-1">Powered by MITRA AI</div>
+              <CardContent className="p-6">
+                <div className="text-xs font-semibold text-[#555366] dark:text-[#9290A0]">Avg Match Confidence</div>
+                <div className="text-3xl font-black text-[#329B75] mt-1.5">91.4%</div>
+                <div className="text-[11px] text-[#555366] dark:text-[#9290A0] mt-1">Powered by MITRA AI</div>
               </CardContent>
             </Card>
           </div>
@@ -295,22 +297,22 @@ export default function RecruiterDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
-                <CardTitle className="text-base">Top Matching Student Talent</CardTitle>
-                <CardDescription>Students with high career readiness scores matching your tech stack</CardDescription>
+                <CardTitle className="text-lg">Top Matching Student Talent</CardTitle>
+                <CardDescription>Verified students with high career readiness matching your tech stack</CardDescription>
               </div>
               <Button size="sm" variant="outline" onClick={() => setActiveTab("candidates")}>
                 Explore All
               </Button>
             </CardHeader>
             <CardContent>
-              <div className="divide-y divide-[#F1DCE5] dark:divide-[#493440]">
+              <div className="divide-y divide-[#E8E4DD] dark:divide-[#2E274D]">
                 {candidates.slice(0, 3).map((candidate) => (
-                  <div key={candidate.id} className="py-3.5 flex items-center justify-between">
+                  <div key={candidate.id} className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                      <h4 className="text-sm font-bold text-[#30232A] dark:text-[#FFF3F7]">
+                      <h4 className="text-base font-bold text-[#17152B] dark:text-[#F7F5F0]">
                         {candidate.full_name}
                       </h4>
-                      <p className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
+                      <p className="text-xs text-[#555366] dark:text-[#9290A0] mt-0.5">
                         {candidate.department} • {candidate.institution_name} (Class of {candidate.graduation_year})
                       </p>
                     </div>
@@ -330,34 +332,39 @@ export default function RecruiterDashboardPage() {
 
       {/* TAB 2: OPPORTUNITIES */}
       {activeTab === "opportunities" && (
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-[#30232A] dark:text-[#FFF3F7]">
-              Current Postings ({opportunities.length})
-            </h3>
-            <Button size="sm" onClick={() => setPostModalOpen(true)}>
+            <div>
+              <h3 className="text-2xl font-bold text-[#17152B] dark:text-[#F7F5F0]">
+                Current Postings ({opportunities.length})
+              </h3>
+              <p className="text-xs sm:text-sm text-[#555366] dark:text-[#9290A0]">
+                Manage live corporate positions published across the MITRA academic grid.
+              </p>
+            </div>
+            <Button size="sm" onClick={() => setPostModalOpen(true)} className="gap-2">
               <Plus className="h-4 w-4" /> Add Posting
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {opportunities.map((opp) => (
-              <Card key={opp.id}>
-                <CardContent className="p-5 space-y-3">
+              <Card key={opp.id} className="hover:border-[#7655E8] transition-all">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <Badge variant="secondary" className="uppercase text-[10px]">
                       {opp.opportunity_type}
                     </Badge>
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+                    <span className="text-xs text-[#329B75] font-bold">
                       {opp.status.toUpperCase()}
                     </span>
                   </div>
-                  <h4 className="text-base font-bold text-[#30232A] dark:text-[#FFF3F7]">{opp.title}</h4>
-                  <p className="text-xs text-[#806D76] dark:text-[#C3ADB8] line-clamp-2">{opp.description}</p>
-                  <div className="text-xs font-medium text-[#C94F7C] dark:text-[#F09ABB]">
+                  <h4 className="text-lg font-bold text-[#17152B] dark:text-[#F7F5F0]">{opp.title}</h4>
+                  <p className="text-xs text-[#555366] dark:text-[#9290A0] line-clamp-2 leading-relaxed">{opp.description}</p>
+                  <div className="text-xs font-semibold text-[#7655E8] dark:text-[#EDE8FF]">
                     {opp.location} • {opp.duration}
                   </div>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5 pt-1">
                     {opp.required_skills?.map((s, idx) => (
                       <Badge key={idx} variant="outline" className="text-[10px]">
                         {s}
@@ -373,38 +380,38 @@ export default function RecruiterDashboardPage() {
 
       {/* TAB 3: CANDIDATES */}
       {activeTab === "candidates" && (
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row gap-3">
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#806D76]" />
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9290A0]" />
               <Input
-                placeholder="Filter by skill, e.g. React, Python, Machine Learning..."
+                placeholder="Filter verified candidates by skill (e.g. Next.js, Python, Kubernetes)..."
                 value={searchSkill}
                 onChange={(e) => setSearchSkill(e.target.value)}
-                className="pl-10"
+                className="pl-11"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {candidates.map((c) => (
-              <Card key={c.id}>
-                <CardContent className="p-5 space-y-3">
+              <Card key={c.id} className="hover:border-[#7655E8] transition-all">
+                <CardContent className="p-6 space-y-4">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="text-base font-bold text-[#30232A] dark:text-[#FFF3F7]">{c.full_name}</h4>
-                      <p className="text-xs text-[#806D76] dark:text-[#C3ADB8]">{c.institution_name}</p>
+                      <h4 className="text-lg font-bold text-[#17152B] dark:text-[#F7F5F0]">{c.full_name}</h4>
+                      <p className="text-xs text-[#555366] dark:text-[#9290A0] mt-0.5">{c.institution_name}</p>
                     </div>
                     <Badge variant="verified">{c.career_readiness_score}%</Badge>
                   </div>
-                  <div className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
+                  <div className="text-xs text-[#555366] dark:text-[#9290A0]">
                     <strong>Degree:</strong> {c.degree} ({c.department})
                   </div>
-                  <div className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
-                    <strong>Graduating:</strong> {c.graduation_year}
+                  <div className="text-xs text-[#555366] dark:text-[#9290A0]">
+                    <strong>Graduating:</strong> Class of {c.graduation_year}
                   </div>
                   <div className="pt-2">
-                    <Button size="sm" variant="secondary" className="w-full text-xs">
+                    <Button size="sm" variant="secondary" className="w-full text-xs font-bold">
                       Inspect Skill Passport
                     </Button>
                   </div>
@@ -417,17 +424,22 @@ export default function RecruiterDashboardPage() {
 
       {/* TAB 4: APPLICATION PIPELINE */}
       {activeTab === "pipeline" && (
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-[#30232A] dark:text-[#FFF3F7]">
-            Candidate Application Pipeline
-          </h3>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-2xl font-bold text-[#17152B] dark:text-[#F7F5F0]">
+              Candidate Application Pipeline
+            </h3>
+            <p className="text-xs sm:text-sm text-[#555366] dark:text-[#9290A0]">
+              Review applicant portfolios, schedule technical interviews, and issue verified offers.
+            </p>
+          </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {pipeline.map((app) => (
               <Card key={app.id}>
-                <CardContent className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
+                <CardContent className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2.5">
                       <Badge
                         variant={
                           app.status === "shortlisted"
@@ -439,28 +451,28 @@ export default function RecruiterDashboardPage() {
                       >
                         {app.status.toUpperCase()}
                       </Badge>
-                      <span className="text-xs text-[#806D76] dark:text-[#C3ADB8]">
+                      <span className="text-xs font-bold text-[#329B75]">
                         Match: {app.match_score}%
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-[#30232A] dark:text-[#FFF3F7]">
+                    <h4 className="text-base font-bold text-[#17152B] dark:text-[#F7F5F0]">
                       {app.student_name} ({app.student_email})
                     </h4>
-                    <p className="text-xs text-[#C94F7C] dark:text-[#F09ABB]">
+                    <p className="text-xs font-semibold text-[#7655E8] dark:text-[#EDE8FF]">
                       Applied for: {app.opportunity_title}
                     </p>
                     {app.cover_letter && (
-                      <p className="text-xs text-[#806D76] dark:text-[#C3ADB8] italic">
-                        "{app.cover_letter}"
+                      <p className="text-xs text-[#555366] dark:text-[#9290A0] italic bg-[#F7F5F0] p-3 rounded-xl dark:bg-[#12101F]">
+                        &quot;{app.cover_letter}&quot;
                       </p>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5 shrink-0">
                     <Button
                       size="sm"
                       variant="outline"
-                      className="text-emerald-600 border-emerald-200 hover:bg-emerald-50"
+                      className="text-[#329B75] border-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30"
                       onClick={() =>
                         updateStatusMutation.mutate({
                           id: app.id,
@@ -469,12 +481,12 @@ export default function RecruiterDashboardPage() {
                         })
                       }
                     >
-                      <Check className="h-4 w-4 mr-1" /> Shortlist
+                      <Check className="h-4 w-4 mr-1.5" /> Shortlist
                     </Button>
                     <Button
                       size="sm"
                       variant="outline"
-                      className="text-rose-600 border-rose-200 hover:bg-rose-50"
+                      className="text-rose-600 border-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950/30"
                       onClick={() =>
                         updateStatusMutation.mutate({
                           id: app.id,
@@ -483,7 +495,7 @@ export default function RecruiterDashboardPage() {
                         })
                       }
                     >
-                      <X className="h-4 w-4 mr-1" /> Pass
+                      <X className="h-4 w-4 mr-1.5" /> Pass
                     </Button>
                   </div>
                 </CardContent>
