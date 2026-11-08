@@ -200,3 +200,10 @@ export interface MessageResponse {
   message: string;
   data?: any;
 }
+export interface RoleProfileUpdate {
+  display_name?: string;
+  full_name?: string;
+  phone_number?: string;
+  avatar_url?: string;
+  role?: UserRole;
+}
