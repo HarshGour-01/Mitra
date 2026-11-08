@@ -1,0 +1,25 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+.next/
+dist/
+out/
+
+# IDE and logs
+.vscode/
+.idea/
+*.log
+# Exclude old duplicate backend and temporary test files
+backend/ayuconnect-ai/
+backend/ayuconnect-ai-backend.zip
+backend/test_db_connection.py

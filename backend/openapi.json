@@ -1,0 +1,555 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MITRA Academia-Industry Platform API",
+    "description": "Production-grade FastAPI backend for MITRA - Academia-Industry Collaboration Platform.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "Health Check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "tags": ["Authentication & User"],
+        "summary": "Get My Profile",
+        "description": "Retrieve current authenticated user profile and active role.",
+        "operationId": "get_my_profile_api_v1_auth_me_get",
+        "security": [{"HTTPBearer": []}],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/UserProfileResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/students/profile": {
+      "get": {
+        "tags": ["Student Portal"],
+        "summary": "Get Student Profile",
+        "description": "Fetch authenticated student's profile details.",
+        "operationId": "get_student_profile_api_v1_students_profile_get",
+        "security": [{"HTTPBearer": []}],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/StudentProfileResponse"}
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Student Portal"],
+        "summary": "Update Student Profile",
+        "description": "Update student profile details.",
+        "operationId": "update_student_profile_api_v1_students_profile_put",
+        "security": [{"HTTPBearer": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/StudentProfileUpdate"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/MessageResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/students/skills": {
+      "get": {
+        "tags": ["Student Portal"],
+        "summary": "Get Student Skills",
+        "description": "Fetch authenticated student's Skill Passport.",
+        "operationId": "get_student_skills_api_v1_students_skills_get",
+        "security": [{"HTTPBearer": []}],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {"$ref": "#/components/schemas/StudentSkillItem"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Student Portal"],
+        "summary": "Add Student Skill",
+        "description": "Add a new skill to student passport.",
+        "operationId": "add_student_skill_api_v1_students_skills_post",
+        "security": [{"HTTPBearer": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/StudentSkillAdd"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/MessageResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/students/resume/analyze": {
+      "post": {
+        "tags": ["Student Portal"],
+        "summary": "Analyze Student Resume",
+        "description": "Upload and analyze resume with AI Career Engine.",
+        "operationId": "analyze_student_resume_api_v1_students_resume_analyze_post",
+        "security": [{"HTTPBearer": []}],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/ResumeAnalysisResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/opportunities": {
+      "get": {
+        "tags": ["Opportunities & Jobs"],
+        "summary": "List Opportunities",
+        "description": "List opportunities with multi-parameter filtering.",
+        "operationId": "list_opportunities_api_v1_opportunities_get",
+        "parameters": [
+          {"name": "type", "in": "query", "required": false, "schema": {"type": "string"}},
+          {"name": "work_mode", "in": "query", "required": false, "schema": {"type": "string"}},
+          {"name": "search", "in": "query", "required": false, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {"$ref": "#/components/schemas/OpportunityResponse"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Opportunities & Jobs"],
+        "summary": "Create Opportunity",
+        "description": "Create a new job, internship, or collaborative project.",
+        "operationId": "create_opportunity_api_v1_opportunities_post",
+        "security": [{"HTTPBearer": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/OpportunityCreate"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/OpportunityResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/opportunities/{opportunity_id}": {
+      "get": {
+        "tags": ["Opportunities & Jobs"],
+        "summary": "Get Opportunity Detail",
+        "description": "Retrieve full details for an individual opportunity.",
+        "operationId": "get_opportunity_detail_api_v1_opportunities__opportunity_id__get",
+        "parameters": [
+          {"name": "opportunity_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/OpportunityResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/applications/my": {
+      "get": {
+        "tags": ["Application Center"],
+        "summary": "Get My Applications",
+        "description": "Retrieve all applications submitted by the current authenticated student.",
+        "operationId": "get_my_applications_api_v1_applications_my_get",
+        "security": [{"HTTPBearer": []}],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {"$ref": "#/components/schemas/ApplicationResponse"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/applications": {
+      "post": {
+        "tags": ["Application Center"],
+        "summary": "Submit Application",
+        "description": "Submit a student application for an active opportunity.",
+        "operationId": "submit_application_api_v1_applications_post",
+        "security": [{"HTTPBearer": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/ApplicationCreate"}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/ApplicationResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/applications/{application_id}/status": {
+      "patch": {
+        "tags": ["Application Center"],
+        "summary": "Update Application Status",
+        "description": "Update candidate application status.",
+        "operationId": "update_application_status_api_v1_applications__application_id__status_patch",
+        "security": [{"HTTPBearer": []}],
+        "parameters": [
+          {"name": "application_id", "in": "path", "required": true, "schema": {"type": "string"}}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/ApplicationStatusUpdate"}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/MessageResponse"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/recruiters/candidates": {
+      "get": {
+        "tags": ["Recruiter & Company Portal"],
+        "summary": "Search Candidates",
+        "description": "Search student talent pool matching criteria.",
+        "operationId": "search_candidates_api_v1_recruiters_candidates_get",
+        "security": [{"HTTPBearer": []}],
+        "parameters": [
+          {"name": "skill", "in": "query", "required": false, "schema": {"type": "string"}},
+          {"name": "graduation_year", "in": "query", "required": false, "schema": {"type": "integer"}},
+          {"name": "min_readiness", "in": "query", "required": false, "schema": {"type": "number"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {"$ref": "#/components/schemas/StudentProfileResponse"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ai/skill-gap-analysis": {
+      "get": {
+        "tags": ["AI Career Intelligence"],
+        "summary": "Get Skill Gap Analysis",
+        "description": "Generate tailored skill gap analysis and personalized roadmap.",
+        "operationId": "get_skill_gap_analysis_api_v1_ai_skill_gap_analysis_get",
+        "security": [{"HTTPBearer": []}],
+        "parameters": [
+          {"name": "target_role", "in": "query", "required": false, "schema": {"type": "string"}}
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"$ref": "#/components/schemas/SkillGapAnalysis"}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserProfileResponse": {
+        "type": "object",
+        "required": ["email", "full_name", "role", "id", "created_at"],
+        "properties": {
+          "id": {"type": "string"},
+          "email": {"type": "string", "format": "email"},
+          "full_name": {"type": "string"},
+          "role": {"type": "string"},
+          "avatar_url": {"type": "string", "nullable": true},
+          "phone_number": {"type": "string", "nullable": true},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time", "nullable": true}
+        }
+      },
+      "StudentProfileResponse": {
+        "type": "object",
+        "required": ["id", "user_id", "full_name", "email", "profile_completion", "career_readiness_score", "created_at", "updated_at"],
+        "properties": {
+          "id": {"type": "string"},
+          "user_id": {"type": "string"},
+          "full_name": {"type": "string"},
+          "email": {"type": "string"},
+          "institution_id": {"type": "string", "nullable": true},
+          "institution_name": {"type": "string", "nullable": true},
+          "department": {"type": "string", "nullable": true},
+          "degree": {"type": "string", "nullable": true},
+          "graduation_year": {"type": "integer", "nullable": true},
+          "current_year": {"type": "integer", "nullable": true},
+          "career_goal": {"type": "string", "nullable": true},
+          "resume_url": {"type": "string", "nullable": true},
+          "github_url": {"type": "string", "nullable": true},
+          "linkedin_url": {"type": "string", "nullable": true},
+          "profile_completion": {"type": "integer"},
+          "career_readiness_score": {"type": "number"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "StudentProfileUpdate": {
+        "type": "object",
+        "properties": {
+          "department": {"type": "string", "nullable": true},
+          "degree": {"type": "string", "nullable": true},
+          "graduation_year": {"type": "integer", "nullable": true},
+          "current_year": {"type": "integer", "nullable": true},
+          "career_goal": {"type": "string", "nullable": true},
+          "resume_url": {"type": "string", "nullable": true},
+          "github_url": {"type": "string", "nullable": true},
+          "linkedin_url": {"type": "string", "nullable": true}
+        }
+      },
+      "StudentSkillItem": {
+        "type": "object",
+        "required": ["id", "skill_id", "name", "category", "proficiency_level", "source", "is_verified"],
+        "properties": {
+          "id": {"type": "string"},
+          "skill_id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "proficiency_level": {"type": "integer"},
+          "source": {"type": "string"},
+          "is_verified": {"type": "boolean"},
+          "verified_by": {"type": "string", "nullable": true}
+        }
+      },
+      "StudentSkillAdd": {
+        "type": "object",
+        "required": ["skill_name"],
+        "properties": {
+          "skill_name": {"type": "string"},
+          "category": {"type": "string", "default": "Technical"},
+          "proficiency_level": {"type": "integer", "default": 3}
+        }
+      },
+      "ResumeAnalysisResponse": {
+        "type": "object",
+        "required": ["score", "strengths", "improvements", "extracted_skills", "detected_gaps", "processing_status"],
+        "properties": {
+          "score": {"type": "integer"},
+          "strengths": {"type": "array", "items": {"type": "string"}},
+          "improvements": {"type": "array", "items": {"type": "string"}},
+          "extracted_skills": {"type": "array", "items": {"type": "string"}},
+          "detected_gaps": {"type": "array", "items": {"type": "string"}},
+          "processing_status": {"type": "string"}
+        }
+      },
+      "OpportunityResponse": {
+        "type": "object",
+        "required": ["id", "recruiter_id", "company_name", "title", "opportunity_type", "status", "applicant_count", "created_at", "updated_at"],
+        "properties": {
+          "id": {"type": "string"},
+          "recruiter_id": {"type": "string"},
+          "company_name": {"type": "string"},
+          "company_logo": {"type": "string", "nullable": true},
+          "title": {"type": "string"},
+          "description": {"type": "string", "nullable": true},
+          "responsibilities": {"type": "string", "nullable": true},
+          "opportunity_type": {"type": "string"},
+          "location": {"type": "string", "nullable": true},
+          "work_mode": {"type": "string", "nullable": true},
+          "duration": {"type": "string", "nullable": true},
+          "stipend_min": {"type": "number", "nullable": true},
+          "stipend_max": {"type": "number", "nullable": true},
+          "eligibility": {"type": "string", "nullable": true},
+          "application_deadline": {"type": "string", "format": "date", "nullable": true},
+          "required_skills": {"type": "array", "items": {"type": "string"}},
+          "status": {"type": "string"},
+          "applicant_count": {"type": "integer"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "OpportunityCreate": {
+        "type": "object",
+        "required": ["title", "description"],
+        "properties": {
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "responsibilities": {"type": "string", "nullable": true},
+          "opportunity_type": {"type": "string", "default": "internship"},
+          "location": {"type": "string", "default": "Bangalore, India"},
+          "work_mode": {"type": "string", "default": "hybrid"},
+          "duration": {"type": "string", "default": "6 Months"},
+          "stipend_min": {"type": "number", "default": 15000},
+          "stipend_max": {"type": "number", "default": 25000},
+          "eligibility": {"type": "string", "nullable": true},
+          "application_deadline": {"type": "string", "format": "date", "nullable": true},
+          "required_skills": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "ApplicationResponse": {
+        "type": "object",
+        "required": ["id", "opportunity_id", "opportunity_title", "company_name", "student_id", "student_name", "student_email", "status", "applied_at", "updated_at"],
+        "properties": {
+          "id": {"type": "string"},
+          "opportunity_id": {"type": "string"},
+          "opportunity_title": {"type": "string"},
+          "company_name": {"type": "string"},
+          "student_id": {"type": "string"},
+          "student_name": {"type": "string"},
+          "student_email": {"type": "string"},
+          "resume_url": {"type": "string", "nullable": true},
+          "cover_letter": {"type": "string", "nullable": true},
+          "match_score": {"type": "number", "nullable": true},
+          "match_explanation": {"type": "object", "nullable": true},
+          "status": {"type": "string"},
+          "recruiter_feedback": {"type": "string", "nullable": true},
+          "applied_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "ApplicationCreate": {
+        "type": "object",
+        "required": ["opportunity_id"],
+        "properties": {
+          "opportunity_id": {"type": "string"},
+          "resume_url": {"type": "string", "nullable": true},
+          "cover_letter": {"type": "string", "nullable": true}
+        }
+      },
+      "ApplicationStatusUpdate": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": {"type": "string"},
+          "recruiter_feedback": {"type": "string", "nullable": true}
+        }
+      },
+      "SkillGapAnalysis": {
+        "type": "object",
+        "required": ["target_role", "overall_match_percentage", "matched_skills", "missing_skills", "critical_recommendations", "personalized_roadmap"],
+        "properties": {
+          "target_role": {"type": "string"},
+          "overall_match_percentage": {"type": "number"},
+          "matched_skills": {"type": "array", "items": {"type": "string"}},
+          "missing_skills": {"type": "array", "items": {"type": "string"}},
+          "critical_recommendations": {"type": "array", "items": {"type": "string"}},
+          "personalized_roadmap": {"type": "array", "items": {"type": "object"}}
+        }
+      },
+      "MessageResponse": {
+        "type": "object",
+        "required": ["success", "message"],
+        "properties": {
+          "success": {"type": "boolean"},
+          "message": {"type": "string"},
+          "data": {"nullable": true}
+        }
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
